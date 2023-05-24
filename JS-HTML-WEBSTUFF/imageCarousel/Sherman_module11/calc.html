@@ -1,0 +1,174 @@
+<!--Amanda Sherman
+5-13-2023
+Bellevue University-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Amanda's desktop calc</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #5893d775;
+
+        }
+
+        #calculator {
+            border: 1px solid #000000;
+            border-radius: 5px;
+            padding: 20px;
+        }
+
+        #display {
+            width: 100%;
+            margin-bottom: 10px;
+            border: 1px solid #000000;
+            border-radius: 5px;
+            text-align: right;
+            font-size: 1em;
+        }
+
+        .button-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .button {
+            flex: 1;
+            padding: 10px;
+            margin: 0 5px;
+            border: none;
+            border-radius: 5px;
+            color: #000000;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="calculator">
+        <input id="display" disabled>
+        <div class="button-row">
+            <button class="button" onclick="appendNumber('7')">7</button>
+            <button class="button" onclick="appendNumber('8')">8</button>
+            <button class="button" onclick="appendNumber('9')">9</button>
+            <button class="button" onclick="appendOperator('/')">/</button>
+        </div>
+        <div class="button-row">
+            <button class="button" onclick="appendNumber('4')">4</button>
+            <button class="button" onclick="appendNumber('5')">5</button>
+            <button class="button" onclick="appendNumber('6')">6</button>
+            <button class="button" onclick="appendOperator('*')">*</button>
+        </div>
+        <div class="button-row">
+            <button class="button" onclick="appendNumber('1')">1</button>
+            <button class="button" onclick="appendNumber('2')">2</button>
+            <button class="button" onclick="appendNumber('3')">3</button>
+            <button class="button" onclick="appendOperator('-')">-</button>
+        </div>
+        <div class="button-row">
+            <button class="button" onclick="appendNumber('0')">0</button>
+            <button class="button" onclick="appendOperator('.')">.</button>
+            <button class="button equals" onclick="calculate()">=</button>
+            <button class="button" onclick="appendOperator('+')">+</button>
+        </div>
+        <button class="button clear" onclick="clearDisplay()">Clear</button>
+    </div>
+
+    <script>
+        // generate random pastel
+        function randomPastelColor() {
+            return 'hsl(' + Math.random() * 360 + ', 100%, 80%)';
+        }
+
+        // Get button and display
+        const buttons = document.querySelectorAll('.button');
+        const displayElement = document.getElementById('display');
+
+        // Generate color for button
+        buttons.forEach(button => {
+            let color;
+            do {
+                color = randomPastelColor();
+            } while (Array.from(buttons).some(b => b.style.backgroundColor === color));
+            button.style.backgroundColor = color;
+        });
+
+        // Generate color for display
+        let color;
+        do {
+            color = randomPastelColor();
+        } while (Array.from(buttons).some(b => b.style.backgroundColor === color));
+        displayElement.style.backgroundColor = color;
+
+    
+        let currentInput = '';
+        let operator = null;
+        let firstOperand = null;
+        let shouldReset = false;
+
+        function appendNumber(number) {
+            if (shouldReset) {
+                resetCalculator();
+            }
+            currentInput = currentInput.toString() + number.toString();
+            updateDisplay();
+        }
+
+        function appendOperator(op) {
+            if (operator !== null) calculate();
+            firstOperand = currentInput;
+            operator = op;
+            shouldReset = true;
+        }
+
+        function calculate() {
+            if (operator === null || shouldReset) return;
+            let result;
+            switch (operator) {
+                case '+':
+                    result = parseFloat(firstOperand) + parseFloat(currentInput);
+                    break;
+                case '-':
+                    result = parseFloat(firstOperand) - parseFloat(currentInput);
+                    break;
+                case '*':
+                    result = parseFloat(firstOperand) * parseFloat(currentInput);
+                    break;
+                case '/':
+                    result = parseFloat(firstOperand) / parseFloat(currentInput);
+                    break;
+            }
+            currentInput = result;
+            operator = null;
+            firstOperand = null;
+            shouldReset = true;
+            updateDisplay();
+        }
+
+        function clearDisplay() {
+            currentInput = '';
+            operator = null;
+            firstOperand = null;
+            shouldReset = false;
+            updateDisplay();
+        }
+
+        function resetCalculator() {
+            currentInput = '';
+            shouldReset = false;
+        }
+
+        function updateDisplay() {
+            displayElement.value = currentInput;
+        }
+    </script>
+</body>
+</html>
+

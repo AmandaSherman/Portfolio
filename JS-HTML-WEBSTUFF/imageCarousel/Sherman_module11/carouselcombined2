@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Viewer</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            background: #f8f8f8;
+        }
+        #content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px; /* You can adjust this value */
+        }
+        #main-image-container {
+            width: 400px;
+            height: 500px;
+            overflow: hidden;
+        }
+        #main-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        #image-list {
+            width: 200px;
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .thumbnail {
+            width: 100px; /* adjust as needed */
+            height: 100px; /* adjust as needed */
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+            transition: transform .2s;
+            cursor: pointer;
+        }
+        .thumbnail:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div id="content">
+        <div id="main-image-container">
+            <img id="main-image" src="image1.jpg">
+        </div>
+
+        <div id="image-list">
+            <img class="thumbnail" src="image1.jpg" onclick="changeMainImage('image1.jpg')">
+            <img class="thumbnail" src="image2.jpeg" onclick="changeMainImage('image2.jpeg')">
+            <img class="thumbnail" src="image3.jpeg" onclick="changeMainImage('image3.jpeg')">
+            <img class="thumbnail" src="image4.jpeg" onclick="changeMainImage('image4.jpeg')">
+            <img class="thumbnail" src="image5.jpeg" onclick="changeMainImage('image5.jpeg')">
+            <img class="thumbnail" src="image6.jpeg" onclick="changeMainImage('image6.jpeg')">
+            <img class="thumbnail" src="image7.jpeg" onclick="changeMainImage('image7.jpeg')">
+            <img class="thumbnail" src="image8.jpeg" onclick="changeMainImage('image8.jpeg')">
+            <img class="thumbnail" src="image9.jpeg" onclick="changeMainImage('image9.jpeg')">
+            <img class="thumbnail" src="image10.jpeg" onclick="changeMainImage('image10.jpeg')">
+        </div>
+    </div>
+
+    <script>
+        function changeMainImage(imageSrc) {
+            document.getElementById('main-image').src = imageSrc;
+        }
+
+        var scrollAmount = 0;
+        var scrollDirection = 1; // 1 for down, -1 for up
+        var imageList = document.getElementById('image-list');
+
+        function step() {
+            if (scrollAmount >= imageList.scrollHeight - imageList.offsetHeight) {
+                scrollDirection = -1; // Change direction to up
+            } else if (scrollAmount <= 0) {
+                scrollDirection = 1; // Change direction to down
+            }
+            scrollAmount += scrollDirection;
+            imageList.scrollTo(0, scrollAmount);
+        }
+        setInterval(step, 30); // change scroll speed here
+    </script>
+</body>
+</html>

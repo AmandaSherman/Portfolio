@@ -1,0 +1,183 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f1d0a68f;
+  }
+  
+  /* Header section */
+  header {
+    background-color: #57abe04f;
+    color: #ffffe6;
+    padding: 30px;
+    text-align: center;
+  }
+  
+  header h1 {
+    font-size: 36px;
+    margin-top: 20px;
+  }
+  
+  header p {
+    font-size: 18px;
+    margin-top: 10px;
+  }
+  
+  header img {
+    display: block;
+    margin: 0 auto 20px;
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  }
+  
+h2 {
+    text-align: center;
+    padding-top: 50px;
+}
+  /* Hobbies section */
+  .hobbies {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 5px 20px;
+  }
+  
+  .hobby-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    margin: 20px;
+    overflow: hidden;
+    transition: transform 0.2s ease-out;
+    width: calc(33.33% - 40px);
+  }
+  
+  .hobby-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .hobby-card img {
+    height: 180px;
+    object-fit: cover;
+    width: 100%;
+  }
+  
+  .hobby-card h3 {
+    color: #333;
+    font-size: 24px;
+    margin: 10px 10px;
+  }
+  
+  .hobby-card p {
+    color: #777;
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 10px;
+    text-align: justify;
+  }
+  
+  /* Work experience section */
+  .experience {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 5px 20px;
+  }
+  
+  .experience-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    margin: 20px;
+    overflow: hidden;
+    transition: transform 0.2s ease-out;
+    width: calc(33.33% - 40px);
+  }
+  
+  .experience-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .experience-card h3 {
+    color: #333;
+    font-size: 24px;
+    margin: 10px 10px;
+  }
+  
+  .experience-card p {
+    color: #777;
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 10px;
+    text-align: justify;
+  }
+  
+  /* Contact section */
+.contact {
+    margin: 50px 0;
+    text-align: center;
+  }
+  
+  .contact h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .contact-form {
+    background-color: #4ac0f3ac;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    display: inline-block;
+    padding: 20px;
+  }
+  
+  .contact-form label {
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: left;
+  }
+  
+  .contact-form input[type="text"],
+  .contact-form input[type="email"] {
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    display: block;
+    font-size: 16px;
+    margin-bottom: 20px;
+    padding: 10px;
+    width: 100%;
+  }
+  
+  .contact-form button {
+    background-color: #333;
+    border: none;
+    border-radius: 5px;
+    color: #f8eccb87;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    transition: background-color 0.2s ease-out;
+  }
+  
+  .contact-form button:hover {
+    background-color: #aee0f7;
+  }
+  
+  .contact-form button:active {
+    background-color: #eef8c3;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3) inset;
+    outline: none;
+  }
+  

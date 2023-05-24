@@ -1,0 +1,163 @@
+<!--Amanda Sherman
+5-13-2023
+Bellevue University-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>To Do</title>
+    <style>
+    
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #7fbce8;
+            margin: 0;
+            padding: 20px;;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 20px;
+            background-color: #200a29;
+            color: #fff;
+            margin: 0;
+        }
+
+        #task-form {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        #task-input {
+            flex-grow: 1;
+            padding: 10px;
+            margin-right: 10px;
+            border-radius: 5px;
+            border: 1px solid #f8a8a8;
+        }
+
+        #task-form button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #3a0808;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        #task-list {
+            width: 60%;
+            margin: 0 auto;
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #task-list li {
+            background-color: #b8f6c7;
+            padding: 20px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #task-list li button {
+            margin-left: 10px;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #task-list li .delete {
+            background-color: #ff4d4d;
+            color: #fff;
+        }
+
+        #task-list li .done {
+            background-color: #4dff4d;
+            color: #fff;
+        }
+
+        .completed {
+            text-decoration: line-through;
+        }
+    
+
+    </style>
+</head>
+<body>
+    <h1>To Do Today!</h1>
+    <form id="task-form">
+        <input type="text" id="task-input" placeholder="New task...">
+        <button>Add To List</button>
+    </form>
+    <ul id="task-list"></ul>
+
+    <script>
+        // Get form, inp list from DOM
+        const form = document.querySelector('#task-form');
+        const input = document.querySelector('#task-input');
+        const list = document.querySelector('#task-list');
+
+        // Load tasks
+        let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+        // create a new task
+        function createTask(text, completed = false) {
+            const li = document.createElement('li');
+            const textNode = document.createTextNode(text);
+            li.appendChild(textNode);
+
+            if (completed) {
+                li.classList.add('completed');
+            }
+
+            // Mark as done" button
+            const doneButton = document.createElement('button');
+            doneButton.innerText = 'Mark as Done';
+            doneButton.onclick = function() {
+                li.classList.toggle('completed');
+                const taskIndex = tasks.findIndex(task => task.text === text);
+                tasks[taskIndex].completed = !tasks[taskIndex].completed;
+                localStorage.setItem('tasks', JSON.stringify(tasks));
+            };
+            li.appendChild(doneButton);
+
+            // Delete button
+            const deleteButton = document.createElement('button');
+            deleteButton.innerText = 'Delete';
+            deleteButton.onclick = function() {
+                list.removeChild(li);
+                tasks = tasks.filter(task => task.text !== text);
+                localStorage.setItem('tasks', JSON.stringify(tasks));
+            };
+            li.appendChild(deleteButton);
+
+            return li;
+        }
+
+        // add a new task
+        function addTask(event) {
+            event.preventDefault();
+            const text = input.value.trim();
+            if (text) {
+                const task = { text, completed: false };
+                tasks.push(task);
+                list.appendChild(createTask(text));
+                input.value = '';
+                localStorage.setItem('tasks', JSON.stringify(tasks));
+            }
+        }
+
+        // Attach the form submit event
+        form.onsubmit = addTask;
+
+        // Load tasks on page load
+        tasks.forEach(task => list.appendChild(createTask(task.text, task.completed)));
+    </script>
+</body>
+</html>
